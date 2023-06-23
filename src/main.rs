@@ -1,19 +1,30 @@
+mod secrets;
 use actix_web::{get, post, App, HttpRequest, HttpResponse, HttpServer, Responder};
-
+use std::env;
 
 #[post("/{route}")]
-async fn example(req: HttpRequest) -> HttpResponse {
-
+async fn post_endpoint(req: HttpRequest) -> HttpResponse {
+    //println!("{:?}", req);
     let url = req.match_info().get("route").unwrap();
 
-    if url != "secret1" {
+    if url != env::var("url").unwrap() {
+        //TODO make sure unwrap on above line never crashes program (empty key string)
+        //IF URL DOESN'T MATCH RETURN 404
+        return HttpResponse::NotFound()
+            .finish()
+    } else if !(req.headers().contains_key("key") && (req.headers().get("key").unwrap().to_str().unwrap() == env::var("key").unwrap())) {
+        //TODO make sure unwrap on above line never crashes program (empty key string)
+        //IF THE KEY IS CORRECT CONTINUE. OTHERWISE RETURN 404
         return HttpResponse::NotFound()
             .finish()
     }
+
+    //OTHERWISE EXECUTE
+    println!("good request received. execute execute execute");
     HttpResponse::Ok()
-        .insert_header(("test1", "valueQWERTY"))
-        .insert_header(("test2", "valueASDF"))
+        .insert_header(("dummy_key", "test value"))
         .finish()
+
 }
 
 #[get("/")]
@@ -23,12 +34,16 @@ async fn hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    secrets::ready_vars();
+
+    println!("url {}\nkey {}", env::var("url").unwrap(), env::var("key").unwrap());
+
     HttpServer::new(|| {
         App::new()
-            .service(example)
+            .service(post_endpoint)
             .service(hello)
     })
-        .bind(("127.0.0.1", 8080))?
+        .bind(("192.168.1.157", 8080))?
         .run()
         .await
 }
