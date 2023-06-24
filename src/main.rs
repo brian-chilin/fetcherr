@@ -1,4 +1,5 @@
 mod secrets;
+mod command;
 use actix_web::{get, post, App, HttpRequest, HttpResponse, HttpServer, Responder};
 use std::env;
 
@@ -21,6 +22,7 @@ async fn post_endpoint(req: HttpRequest) -> HttpResponse {
 
     //OTHERWISE EXECUTE
     println!("good request received. execute execute execute");
+    command::execute();
     HttpResponse::Ok()
         .insert_header(("dummy_key", "test value"))
         .finish()
