@@ -12,7 +12,7 @@ The machine hosting must have paths properly set up, so typing 'cargo' in any di
 
 Will use 'supervisor' available at http://supervisord.org/index.html
 ### Config
-Make secrets.json by copying secretsFORMAT.json & fill in url and key with something secret you choose.
+Make secrets.json by copying secretsFORMAT.json and fill in url & key with something secret you choose. I'm no expert but my gut tells me to recommend UUIDs. 
 Also fill in the IP with IP of the machine running fetcherr. This is often in a format like 192.168.1.X
 Also, fill in a port to listen on. I'll be using 9000 for this guide
 
