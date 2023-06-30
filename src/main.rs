@@ -21,10 +21,10 @@ async fn post_endpoint(req: HttpRequest) -> HttpResponse {
     }
 
     //OTHERWISE EXECUTE
-    println!("good request received. execute execute execute");
+    //println!("good request received. executing command");
     command::execute();
     HttpResponse::Ok()
-        .insert_header(("dummy_key", "test value"))
+        .insert_header(("dummy_key", "test value"))//TODO make appropriate response header
         .finish()
 
 }
@@ -32,21 +32,11 @@ async fn post_endpoint(req: HttpRequest) -> HttpResponse {
 #[get("/")]
 async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
-}
+} //TODO remove useless endpoint
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     secrets::ready_vars();
-
-    /*
-    println!("url {}\nkey {}\nip {}\nport {}\ndirectory{}",
-        env::var("url").unwrap(),
-        env::var("key").unwrap(),
-        env::var("ip").unwrap(),
-        env::var("port").unwrap(),
-        env::var("directory").unwrap()
-    );
-     */
 
     HttpServer::new(|| {
         App::new()

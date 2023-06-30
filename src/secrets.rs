@@ -22,11 +22,9 @@ pub fn ready_vars() {
     // Print the contents of the file
     //println!("File contents:\n{}", contents);
     let j_secrets: HashMap<String, String> = serde_json::from_str(&contents).unwrap();
-    //println!("j_secrets: {:?}", j_secrets);
     for (key, value) in &j_secrets {
         println!("{}: {}", key, value);
         env::set_var(key, value);
     }
-    //env::set_var("url", OsString::from(j_secrets.get("url").unwrap()));
 
 }

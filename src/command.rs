@@ -2,19 +2,8 @@ use std::process::Command;
 use std::env;
 
 pub fn execute() {
-    //println!("command execute here");
-
-    /*
-    let output = Command::new("testrrr.exe")
-        .current_dir(
-            env::var("directory").unwrap() + "\\target\\debug"
-        )
-        .output()
-        .expect("failed to execute process");
-    */
-    println!("{}", env::var("proj_cargo_toml").unwrap().replace("\\", "\\\\") );
+    // execute: cargo build --manifest-path="\path\to\rust_project\Cargo.toml"
     let output = Command::new(
-        //env::var("cargo_directory").unwrap() + "\\cargo"
             "cargo"
         )
         .arg("build")
@@ -26,6 +15,7 @@ pub fn execute() {
     if output.status.success() {
         // Print the output
         let stdout = String::from_utf8_lossy(&output.stdout);
+        //TODO figure out how to make this not hang. perhaps use spawn() instead of output()
         println!("Command output:\n{}", stdout);
     } else {
         // Print the error message
