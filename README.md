@@ -1,4 +1,4 @@
-# unfinished. currently only builds rust programs
+# unfinished. currently only builds rust programs. this program is unsafe to use as http will share uri and headers are plaintext, ready for anyone to find
 
 # fetcherr
 Niche and unsupported program only intended to run on Debian. Intended use is to await a POST request (likely sent from GitHub workflow) then fetch a project, compile, stop the running instance, and restart the new&freshly compiled program
