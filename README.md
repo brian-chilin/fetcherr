@@ -1,10 +1,16 @@
+# unfinished. currently only builds rust programs
+
 # fetcherr
-Niche and unsupported program only intended to run on Debian. Intended use is to await a POST request (likely sent from GitHub workflow) then fetch a project, compile, stop the running instance, and restart the new&freshly compiled program 
+Niche and unsupported program only intended to run on Debian. Intended use is to await a POST request (likely sent from GitHub workflow) then fetch a project, compile, stop the running instance, and restart the new&freshly compiled program
+#### Use case
+Websites that are incrementally updated quickly. Setting up fetcherr would be a waste of time for sites that only need to fetch from version control & build once in a while. Setting up fetcherr will make it very easy to keep my portfolio updated. I can make a variable amount of commits, then send a single signal to tell a server to re-deploy. Fetcherr's aim is to take away all the steps after I make the POST request, and to seamlessly handle re-deployment. This is notably easy in conjunction with supervisor.
 
 # instructions TODO use https
 ### Pre-reqs
 Githup repo where the top level is an IntelliJ Rust(plugin) program.
 The machine hosting must have paths properly set up, so typing 'cargo' in any directory should show help for Rust's package manager.
+
+Will use 'supervisor' available at http://supervisord.org/index.html
 ### Config
 Make secrets.json by copying secretsFORMAT.json & fill in url and key with something secret you choose.
 Also fill in the IP with IP of the machine running fetcherr. This is often in a format like 192.168.1.X
