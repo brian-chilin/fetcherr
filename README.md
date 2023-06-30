@@ -10,7 +10,8 @@ Make secrets.json by copying secretsFORMAT.json & fill in url and key with somet
 Also fill in the IP with IP of the machine running fetcherr. This is often in a format like 192.168.1.X
 Also, fill in a port to listen on. I'll be using 9000 for this guide
 
-proj_cargo_toml should be the Cargo.toml file of your project.  
+proj_cargo_toml should be the Cargo.toml file of your project. The only conventions I've tested are C:\\path\\to\\Cargo.toml on Windows10
+and /path/to/Cargo.toml on Debian11 and they seem to work. 
 ### Post Request Setup
 You will make GitHub make a POST request to http://ip:9000/SECRETS_URL with a JSON header "key: SECRETS_KEY"
 
