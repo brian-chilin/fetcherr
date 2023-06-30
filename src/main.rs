@@ -38,14 +38,28 @@ async fn hello() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     secrets::ready_vars();
 
-    println!("url {}\nkey {}", env::var("url").unwrap(), env::var("key").unwrap());
+    /*
+    println!("url {}\nkey {}\nip {}\nport {}\ndirectory{}",
+        env::var("url").unwrap(),
+        env::var("key").unwrap(),
+        env::var("ip").unwrap(),
+        env::var("port").unwrap(),
+        env::var("directory").unwrap()
+    );
+     */
 
     HttpServer::new(|| {
         App::new()
             .service(post_endpoint)
             .service(hello)
     })
-        .bind(("192.168.1.157", 8080))?
+        .bind(
+            (
+                        env::var("ip").unwrap(),
+                        env::var("port").unwrap().parse().unwrap()
+                )
+        )?
+        //.bind(("192.168.1.157", 8080))?
         .run()
         .await
 }

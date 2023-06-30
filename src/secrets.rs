@@ -1,7 +1,7 @@
 use std::env;
 use std::fs::File;
 use std::io::Read;
-use serde_json::{Value};
+use std::collections::HashMap;
 
 pub fn ready_vars() {
     //reads secrets.json and prepares environmental variables
@@ -12,7 +12,6 @@ pub fn ready_vars() {
             return;
         }
     };
-
     // Read the contents of the file into a string
     let mut contents = String::new();
     if let Err(error) = file.read_to_string(&mut contents) {
@@ -22,10 +21,12 @@ pub fn ready_vars() {
 
     // Print the contents of the file
     //println!("File contents:\n{}", contents);
-    let j_secrets: Value = serde_json::from_str(&contents).unwrap();
+    let j_secrets: HashMap<String, String> = serde_json::from_str(&contents).unwrap();
     //println!("j_secrets: {:?}", j_secrets);
-    //println!("url: {}\nkey: {}", j_secrets["url"], j_secrets["key"]);
+    for (key, value) in &j_secrets {
+        println!("{}: {}", key, value);
+        env::set_var(key, value);
+    }
+    //env::set_var("url", OsString::from(j_secrets.get("url").unwrap()));
 
-    env::set_var("url", j_secrets["url"].as_str().unwrap());
-    env::set_var("key", j_secrets["key"].as_str().unwrap());
 }
