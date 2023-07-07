@@ -6,6 +6,9 @@ pub fn execute() {
     let mut output = Command::new(
             "cargo"
         )
+        .env("RUSTUP_HOME", env::var("rustup_home"))
+        .env("RUSTUP_TOOLCHAIN", "STABLE")
+        .arg("stable")
         .arg("build")
         .arg("--manifest-path=".to_owned() + &env::var("proj_cargo_toml").unwrap())
         .output()
@@ -29,14 +32,13 @@ pub fn execute() {
         "systemctl"
         )
         .arg("restart")
-        .arg("site_portfolio")
+        .arg(env::var("systemctl_service"))
         .output()
         .expect("Failed to execute");
     // Check if the command was successful
     if output.status.success() {
         // Print the output
         let stdout = String::from_utf8_lossy(&output.stdout);
-        //TODO figure out how to make this not hang. perhaps use spawn() instead of output()
         println!("Command output:\n{}", stdout);
     } else {
         // Print the error message

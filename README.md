@@ -13,9 +13,11 @@ This is notably easy in conjunction with a process manager like systemctl or sup
 
 # instructions (TODO use https)
 ### Pre-reqs
-Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
-The machine hosting must have paths properly set up, where typing 'cargo' in any directory should show help for Rust's package manager.
-The host machine will also need systemctl. 
+* Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
+* The host machine needs systemctl.
+* The host machine needs rustup and the stable toolchain for the system.
+ After rustup is installed the proper toolchain can be installed with 'rustup toolchain install stable'
+
 
 ### Config
 Make config.json by copying configFORMAT.json and fill in url & key with something secret you choose.
@@ -24,8 +26,15 @@ Also fill in the IP with the IP of the machine running fetcherr. This is often i
 Also, fill in a port to listen on. I'll be using 9000 for this guide
 
 proj_cargo_toml should be the Cargo.toml file of your project.
-The only conventions I've tested are C:\\path\\to\\Cargo.toml on Windows10
-and /path/to/Cargo.toml on Debian11.
+The only convention I've tested is /path/to/Cargo.toml on Debian11.
+
+rustup_home should be the directory rustup itself is installed.
+For me, this is "/home/brian/.rustup"
+and I had followed directions on https://rustup.rs/ leaving defaults.
+It's imperative that rustup_home/toolchains contains the stable toolchain.
+For me this is 'stable-x86_64-unknown-linux-gnu'.
+If you take a look inside this toolchain folder it's important to find
+the bin folder with executables like cargo. 
 
 ### Post Request Setup
 You will make GitHub make a POST request to http://ip:9000/SECRETS_URL with a JSON header "key: SECRETS_KEY"
