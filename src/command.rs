@@ -6,7 +6,7 @@ pub fn execute() {
     let mut output = Command::new(
             "cargo"
         )
-        .env("RUSTUP_HOME", env::var("rustup_home"))
+        .env("RUSTUP_HOME", env::var("rustup_home").unwrap())
         .env("RUSTUP_TOOLCHAIN", "STABLE")
         .arg("stable")
         .arg("build")
@@ -32,7 +32,7 @@ pub fn execute() {
         "systemctl"
         )
         .arg("restart")
-        .arg(env::var("systemctl_service"))
+        .arg(env::var("systemctl_service").unwrap())
         .output()
         .expect("Failed to execute");
     // Check if the command was successful
