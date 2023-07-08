@@ -24,15 +24,15 @@ This is notably easy in conjunction with a process manager like systemctl or sup
 
 
 ### Config
-Make config.json by copying configFORMAT.json in the top level directory and fill in url & key with something secret you choose.
+1. Make **config.json** by copying configFORMAT.json in the top level directory and fill in **url & key** with something secret you choose.
 I'm no expert but my gut tells me to recommend UUIDs. 
-Also fill in the IP with the IP of the machine running fetcherr. This is often in a format like 192.168.1.X
-Also, fill in a port to listen on. I'll be using 9000 for this guide 
+Also fill in the **IP** with the IP of the machine running fetcherr. This is often in a format like 192.168.1.X
+Also, fill in a **port** to listen on. I'll be using 9000 for this guide 
 
-proj_cargo_toml should be the Cargo.toml file of your project.
+2. **proj_cargo_toml** should be the Cargo.toml file of your project.
 The only convention I've tested is /path/to/Cargo.toml on Debian11
 
-rustup_home should be the directory rustup itself is installed.
+3. **rustup_home** should be the directory rustup itself is installed.
 For me, this is "/home/brian/.rustup"
 and I had followed directions on https://rustup.rs/ leaving defaults.
 It's imperative that rustup_home/toolchains contains the stable toolchain.
@@ -41,9 +41,12 @@ If you take a look inside this toolchain folder it's important to find
 the bin folder with executables like cargo. 
 
 ### Post Request Setup
-You will make GitHub make a POST request to http://ip:9000/SECRETS_URL with a JSON header "key: SECRETS_KEY"
+You will make GitHub make a POST request to http://ip:9000/SECRETS_URL with a JSON header "key: SECRETS_KEY".
+I've never actually used GH workflow, but my best idea is to trigger a curl request from push.
+This would work particularly nice if you could trigger only after reading the descriptions of commits and looking for a keyword. 
 
 Example using curl: curl -i -X POST http://ip:9000/my_url -H "key: my_key"
+Another alternative to using GH workflows would be to just leave this as a script somewhere. 
 
 Generate a token at https://github.com/settings/tokens for the value of "gh_token"
 
