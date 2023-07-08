@@ -9,7 +9,17 @@ pub fn execute() {
         .arg("pull")
         .output()
         .expect("Failed to execute git pull");
-
+    // Check if the command was successful
+    if output.status.success() {
+        // Print the output
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        //TODO figure out how to make this not hang. perhaps use spawn() instead of output()
+        println!("Command output:\n{}", stdout);
+    } else {
+        // Print the error message
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        eprintln!("Command failed:\n{}", stderr);
+    }
 
     // execute: cargo stable build --release --manifest-path="\path\to\rust_project\Cargo.toml"
     output = Command::new(
