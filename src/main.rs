@@ -44,9 +44,9 @@ async fn main() -> std::io::Result<()> {
             .service(post_endpoint)
             .service(hello)
     })
-        .bind(
-            (env::var("ip").unwrap(), env::var("port").unwrap().parse().unwrap())
-        )?
-        .run()
-        .await
+    .bind(
+        (env::var("ip").unwrap(), env::var("port").unwrap().parse().unwrap())
+    )?
+    .run()
+    .await
 }

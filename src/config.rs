@@ -18,13 +18,16 @@ pub fn ready_vars() {
         println!("Failed to read config.json: {}", error);
         return;
     }
-
-    // Print the contents of the file
+    // Print the entire contents of the file
     //println!("File contents:\n{}", contents);
+
+    //Make JSON string into HashMap
     let j_config: HashMap<String, String> = serde_json::from_str(&contents).unwrap();
+    //Put every key-value pair from hashmap into environment variables
     for (key, value) in &j_config {
-        println!("{}: {}", key, value);
+        // Following line prints all key-value pairs just before setting them as environment variables
+        //println!("{}: {}", key, value);
         env::set_var(key, value);
     }
-
+    
 }
