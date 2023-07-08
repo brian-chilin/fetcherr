@@ -14,7 +14,7 @@ This is notably easy in conjunction with a process manager like systemctl or sup
 # instructions
 ### Pre-reqs
 * Fetcherr is **NOT SECURE** by any means. Post requests are done over open http,
- and I could only recommend using fetcherr over open internet (like GH workflows curl requests) if you have nginx sit in front of fetcherr or another means of using https.
+ and I couldn't recommend using fetcherr over open internet (like GH workflows curl requests) without nginx sitting in front of fetcherr or another means of using https.
  I've already configured my nginx as a reverse proxy that handles ssl for my website,
  so it is easy for me to add another server in my nginx config for fetcherr.
  Because this is my use case, I've decided to not attempt to implement ssl myself into fetcherr. 
