@@ -33,7 +33,7 @@ This is notably easy in conjunction with a process manager like systemctl or sup
 ### Getting started
 You can clone this GitHub repo and run "cargo build --release"
 
-Proceed by following the rest config section below.
+Proceed by following the config section below.
 I'd also recommend making a systemd unit for fetcherr to make it start automatically. 
 
 ### Configuration
