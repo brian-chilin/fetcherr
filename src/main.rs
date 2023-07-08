@@ -1,4 +1,4 @@
-mod secrets;
+mod config;
 mod command;
 use actix_web::{get, post, App, HttpRequest, HttpResponse, HttpServer, Responder};
 use std::env;
@@ -36,7 +36,8 @@ async fn hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    secrets::ready_vars();
+    // ready up variables from config.json
+    config::ready_vars();
 
     HttpServer::new(|| {
         App::new()
@@ -44,12 +45,8 @@ async fn main() -> std::io::Result<()> {
             .service(hello)
     })
         .bind(
-            (
-                        env::var("ip").unwrap(),
-                        env::var("port").unwrap().parse().unwrap()
-                )
+            (env::var("ip").unwrap(), env::var("port").unwrap().parse().unwrap())
         )?
-        //.bind(("192.168.1.157", 8080))?
         .run()
         .await
 }

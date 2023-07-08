@@ -1,5 +1,5 @@
-# unfinished. currently only builds a single RUST program at a time. fetcherr is unsafe to use as http will share uri and headers are plaintext, ready for anyone to find
-
+### INSECURE TO USE OVER OPEN INTERNET
+#### unfinished. currently only builds a single RUST program at a time.
 # fetcherr
 Niche and unsupported program only intended to run on Debian.
 Intended use is to await a POST request (likely sent from GitHub workflow) then fetch a project, compile, stop the running instance, and restart the new & freshly compiled program
@@ -11,8 +11,13 @@ I can make a variable amount of commits, then send a single signal to tell a ser
 Fetcherr's aim is to take away all the steps after I make the POST request, and to seamlessly handle re-deployment.
 This is notably easy in conjunction with a process manager like systemctl or supervisord
 
-# instructions (TODO use https)
+# instructions
 ### Pre-reqs
+* Fetcherr is **NOT SECURE** by any means. Post requests are done over open http,
+ and I could only recommend using fetcherr over open internet (like GH workflows curl requests) if you have nginx sit in front of fetcherr or another means of using https.
+ I've already configured my nginx as a reverse proxy that handles ssl for my website,
+ so it is easy for me to add another server in my nginx config for fetcherr.
+ Because this is my use case, I've decided to not attempt to implement ssl myself into fetcherr. 
 * Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
 * **make sure you use release build of your program. executable should be in target/release. details of release build here**
 
@@ -46,7 +51,8 @@ I've never actually used GH workflow, but my best idea is to trigger a curl requ
 This would work particularly nice if you could trigger only after reading the descriptions of commits and looking for a keyword. 
 
 Example using curl: curl -i -X POST http://ip:9000/my_url -H "key: my_key"
-Another alternative to using GH workflows would be to just leave this as a script somewhere. 
+
+**Another alternative to using GH workflows would be to just leave this as a script somewhere that is quick to execute.**
 
 Generate a token at https://github.com/settings/tokens for the value of "gh_token"
 
