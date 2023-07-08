@@ -28,7 +28,13 @@ This is notably easy in conjunction with a process manager like systemctl or sup
  After rustup is installed the proper toolchain can be installed with 'rustup toolchain install stable'
 
 
-### Config
+### Getting started
+You can clone this GitHub repo and run "cargo build --release"
+
+Proceed by following the rest config section below.
+I'd also recommend making a systemd unit for fetcherr to make it start automatically. 
+
+### Configuration
 1. Make **config.json** by copying configFORMAT.json in the top level directory and fill in **url & key** with something secret you choose.
 I'm no expert but my gut tells me to recommend UUIDs. 
 Also fill in the **IP** with the IP of the machine running fetcherr. This is often in a format like 192.168.1.X
