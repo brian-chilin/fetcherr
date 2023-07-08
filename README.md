@@ -1,5 +1,5 @@
 ### INSECURE TO USE OVER OPEN INTERNET
-#### unfinished. currently only builds a single RUST program at a time.
+#### unfinished. currently only builds a SINGLE RUST program at a time.
 # fetcherr
 Upon receiving a post request, run commands to re-deploy rust websites.
 git pull, cargo build --release, systemctl restart *service*.
@@ -20,6 +20,9 @@ This is notably easy in conjunction with a process manager like systemctl or sup
  so it is easy for me to add another server in my nginx config for fetcherr.
  Because this is my use case, I've decided to not attempt to implement ssl myself into fetcherr. 
 * Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
+  Please also ensure the directory of the local repo is root, as 'git pull' will require the user
+  that's calling the command to also be owning the folder, and systemctl will have fetcherr execute the command as root.
+  **TODO fix this**
 * **Make sure you use release build of your program, "cargo build" defaults to debug.**
   **The executable should be in target/release.**
   **Details of release build here**
