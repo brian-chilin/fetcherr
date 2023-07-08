@@ -14,19 +14,23 @@ This is notably easy in conjunction with a process manager like systemctl or sup
 # instructions (TODO use https)
 ### Pre-reqs
 * Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
+* **make sure you use release build of your program. executable should be in target/release. details of release build here**
+
+  https://doc.rust-lang.org/book/ch14-01-release-profiles.html
 * The host machine needs systemctl.
+ Please have a working and enabled systemctl unit for the program you intend to fetch, build, and restart. 
 * The host machine needs rustup and the stable toolchain for the system.
  After rustup is installed the proper toolchain can be installed with 'rustup toolchain install stable'
 
 
 ### Config
-Make config.json by copying configFORMAT.json and fill in url & key with something secret you choose.
+Make config.json by copying configFORMAT.json in the top level directory and fill in url & key with something secret you choose.
 I'm no expert but my gut tells me to recommend UUIDs. 
 Also fill in the IP with the IP of the machine running fetcherr. This is often in a format like 192.168.1.X
-Also, fill in a port to listen on. I'll be using 9000 for this guide
+Also, fill in a port to listen on. I'll be using 9000 for this guide 
 
 proj_cargo_toml should be the Cargo.toml file of your project.
-The only convention I've tested is /path/to/Cargo.toml on Debian11.
+The only convention I've tested is /path/to/Cargo.toml on Debian11
 
 rustup_home should be the directory rustup itself is installed.
 For me, this is "/home/brian/.rustup"

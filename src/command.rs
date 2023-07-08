@@ -10,6 +10,7 @@ pub fn execute() {
         .env("RUSTUP_TOOLCHAIN", "STABLE")
         .arg("stable")
         .arg("build")
+        .arg("--release")
         .arg("--manifest-path=".to_owned() + &env::var("proj_cargo_toml").unwrap())
         .output()
         .expect("Failed to execute cargo build");
