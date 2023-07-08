@@ -1,8 +1,9 @@
 ### INSECURE TO USE OVER OPEN INTERNET
 #### unfinished. currently only builds a single RUST program at a time.
 # fetcherr
+Upon receiving a post request, run commands to re-deploy rust websites.
+git pull, cargo build --release, systemctl restart *service*.
 Niche and unsupported program only intended to run on Debian.
-Intended use is to await a POST request (likely sent from GitHub workflow) then fetch a project, compile, stop the running instance, and restart the new & freshly compiled program
 #### Use case
 Websites that are incrementally updated quickly.
 Setting up fetcherr would be a waste of time for sites that only need to fetch from version control & build once in a while.

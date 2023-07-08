@@ -2,8 +2,17 @@ use std::process::Command;
 use std::env;
 
 pub fn execute() {
-    // execute: cargo build --manifest-path="\path\to\rust_project\Cargo.toml"
     let mut output = Command::new(
+            "git"
+        )
+        .current_dir(env::var("proj").unwrap())
+        .arg("pull")
+        .output()
+        .expect("Failed to execute git pull");
+
+
+    // execute: cargo stable build --release --manifest-path="\path\to\rust_project\Cargo.toml"
+    output = Command::new(
             "cargo"
         )
         .env("RUSTUP_HOME", env::var("rustup_home").unwrap())
@@ -11,7 +20,7 @@ pub fn execute() {
         .arg("stable")
         .arg("build")
         .arg("--release")
-        .arg("--manifest-path=".to_owned() + &env::var("proj_cargo_toml").unwrap())
+        .arg("--manifest-path=".to_owned() + &env::var("proj").unwrap() + "/Cargo.toml")
         .output()
         .expect("Failed to execute cargo build");
 
@@ -27,8 +36,7 @@ pub fn execute() {
         eprintln!("Command failed:\n{}", stderr);
     }
 
-
-
+    // execute: systemctl restart systemctl_service
     output = Command::new(
         "systemctl"
         )
