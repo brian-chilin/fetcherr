@@ -13,7 +13,6 @@ pub fn execute() {
     if output.status.success() {
         // Print the output
         let stdout = String::from_utf8_lossy(&output.stdout);
-        //TODO figure out how to make this not hang. perhaps use spawn() instead of output()
         println!("Command output:\n{}", stdout);
     } else {
         // Print the error message
