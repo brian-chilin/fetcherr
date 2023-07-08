@@ -19,7 +19,9 @@ This is notably easy in conjunction with a process manager like systemctl or sup
  so it is easy for me to add another server in my nginx config for fetcherr.
  Because this is my use case, I've decided to not attempt to implement ssl myself into fetcherr. 
 * Fetcherr only works for Githup repos where the top level is an IntelliJ Rust(plugin) program.
-* **make sure you use release build of your program. executable should be in target/release. details of release build here**
+* **Make sure you use release build of your program, "cargo build" defaults to debug.**
+  **The executable should be in target/release.**
+  **Details of release build here**
 
   https://doc.rust-lang.org/book/ch14-01-release-profiles.html
 * The host machine needs systemctl.
