@@ -66,6 +66,4 @@ Example using curl: curl -i -X POST http://ip:9000/my_url -H "key: my_key"
 
 **Another alternative to using GH workflows would be to just leave this as a script somewhere that is quick to execute.**
 
-Generate a token at https://github.com/settings/tokens for the value of "gh_token"
-
 Have GitHub workflow/event make a request to the url with the key as the header. Returns 404 on other url's
