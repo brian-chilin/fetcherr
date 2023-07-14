@@ -25,8 +25,6 @@ pub fn execute() {
             "cargo"
         )
         .env("RUSTUP_HOME", env::var("rustup_home").unwrap())
-        .env("RUSTUP_TOOLCHAIN", "STABLE")
-        .arg("stable")
         .arg("build")
         .arg("--release")
         .arg("--manifest-path=".to_owned() + &env::var("proj").unwrap() + "/Cargo.toml")
