@@ -6,7 +6,7 @@ git pull, cargo build --release, systemctl restart *service*.
 Niche and unsupported program only intended to run on Debian.
 #### Use case
 Websites that are incrementally updated quickly.
-Setting up fetcherr would be a waste of time for sites that only need to fetch from version control & build once in a while.
+Setting up fetcherr would be a waste of time for sites that only need to pull from version control & build once in a while.
 Setting up fetcherr will make it very easy to keep my portfolio updated.
 I can make a variable amount of commits, then send a single signal to tell a server to re-deploy.
 Fetcherr's aim is to take away all the steps after I make the POST request, and to seamlessly handle re-deployment.
